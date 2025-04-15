@@ -7,7 +7,7 @@ A Visual Studio Code extension that allows you to easily toggle line numbers on 
 - Toggle line numbers using the command palette
 - Simple and intuitive control of line number visibility
 
-![Line Number Toggle Example](./images/capture.png)
+![Line Number Toggle](https://raw.githubusercontent.com/Finfra/vsCodeExt/main/LineNumberToggle/images/capture.png)
 
 ## Usage
 
