@@ -53,7 +53,7 @@ Text → `* [ ]` → `* [~]` → `* [v]` → `* [!]` → `* [x]` → Text
 - 여러 줄 선택 지원
 - 들여쓰기 및 텍스트 보존
 
-![Todo Asterisk Bullet Demo](https://raw.githubusercontent.com/your-repo/todo-asterisk-bullet/main/images/demo.png)
+![Todo Asterisk Bullet Demo](https://github.com/Finfra/vsCodeExt/blob/main/todo-asterisk-bullet/vscode/images/capture.png?raw=true)
 
 ## 사용법
 

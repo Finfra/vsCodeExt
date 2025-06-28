@@ -2,7 +2,7 @@
   "name": "todo-asterisk-bullet",
   "displayName": "Todo Asterisk Bullet",
   "description": "마크다운에서 * [ ] → * [~] → * [v] → * [!] → * [x] → Text 순환 토글을 지원하는 VSCode 확장",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "nowage",
   "readme": "README.md",
   "engines": {
