@@ -1,0 +1,10 @@
+{
+    "id": "todo-asterisk-bullet",
+    "name": "Todo Asterisk Bullet",
+    "version": "1.0.0",
+    "minAppVersion": "0.15.0",
+    "description": "Toggle asterisk bullet todo states: * → * [ ] → * [x]",
+    "author": "nowage",
+    "authorUrl": "https://finfra.kr/nowage",
+    "isDesktopOnly": false
+}

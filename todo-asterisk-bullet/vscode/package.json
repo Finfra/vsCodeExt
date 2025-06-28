@@ -1,0 +1,43 @@
+{
+  "name": "todo-asterisk-bullet",
+  "displayName": "Todo Asterisk Bullet",
+  "description": "마크다운에서 * [ ] → * [~] → * [v] → * [!] → * [x] → Text 순환 토글을 지원하는 VSCode 확장",
+  "version": "0.0.1",
+  "publisher": "your-name",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:todoAsteriskBullet.toggleState"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "todoAsteriskBullet.toggleState",
+        "title": "Toggle Asterisk Bullet State"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "todoAsteriskBullet.toggleState",
+        "key": "shift+alt+enter",
+        "mac": "shift+option+enter",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.60.0",
+    "typescript": "^4.4.0",
+    "tslint": "^6.1.3"
+  }
+}
