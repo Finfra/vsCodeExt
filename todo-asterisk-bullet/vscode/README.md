@@ -10,7 +10,7 @@ A Visual Studio Code extension for toggling asterisk bullet todo states in Markd
 - Supports multi-line selection
 - Preserves indentation and text content
 
-![Todo Asterisk Bullet Demo](https://raw.githubusercontent.com/your-repo/todo-asterisk-bullet/main/images/demo.png)
+![Todo Asterisk Bullet Demo](https://github.com/Finfra/vsCodeExt/blob/main/todo-asterisk-bullet/vscode/images/capture.png)
 
 ## Usage
 
@@ -69,7 +69,7 @@ VSCode 확장 폴더(`/Users/nowage/.vscode/extensions/todo-asterisk-bullet`)에
 ## 소스 코드
 
 오픈 소스이며 GitHub에서 확인할 수 있습니다:  
-https://github.com/your-repo/todo-asterisk-bullet
+https://github.com/Finfra/vsCodeExt/tree/main/todo-asterisk-bullet
 
 ## 개발자 정보
 

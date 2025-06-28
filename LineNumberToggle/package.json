@@ -2,7 +2,7 @@
   "name": "line-number-toggle",
   "displayName": "Line Number Toggle",
   "description": "Toggle line numbers in the editor - Made by NamJungGu(nowage@gmail.com) Powered by Finfra Co., Ltd",
-  "version": "0.0.9",
+  "version": "0.1.1",
   "publisher": "nowage",
   "readme": "README.md",
   "files": [
@@ -24,8 +24,17 @@
         "command": "line-number-toggle.toggle",
         "title": "Toggle Line Numbers"
       }
+    ],
+    "keybindings": [
+      {
+        "command": "line-number-toggle.toggleState",
+        "key": "ctl+shift+n",
+        "mac": "ctl+shift+n",
+        "when": "editorTextFocus"
+      }
     ]
-  },
+  }
+  ,
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",

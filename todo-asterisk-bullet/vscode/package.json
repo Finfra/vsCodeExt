@@ -2,8 +2,9 @@
   "name": "todo-asterisk-bullet",
   "displayName": "Todo Asterisk Bullet",
   "description": "마크다운에서 * [ ] → * [~] → * [v] → * [!] → * [x] → Text 순환 토글을 지원하는 VSCode 확장",
-  "version": "0.0.1",
-  "publisher": "your-name",
+  "version": "0.0.2",
+  "publisher": "nowage",
+  "readme": "README.md",
   "engines": {
     "vscode": "^1.60.0"
   },
@@ -39,5 +40,23 @@
     "@types/vscode": "^1.60.0",
     "typescript": "^4.4.0",
     "tslint": "^6.1.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Finfra/vsCodeExt/tree/main/todo-asterisk-bullet/vscode"
+  },
+  "license": "MIT",
+  "icon": "images/f.png",
+    "badges": [
+    {
+      "url": "https://img.shields.io/badge/Made%20by-NamJungGu-blue",
+      "href": "https://github.com/nowage",
+      "description": "Made by NamJungGu"
+    },
+    {
+      "url": "https://img.shields.io/badge/Powered%20by-Finfra%20Co.%2C%20Ltd.-green",
+      "href": "https://finfra.kr",
+      "description": "Powered by Finfra Co., Ltd"
+    }
+  ]
 }
