@@ -4,7 +4,7 @@ version = "0.1.0"
 schema_version = 1
 authors = ["NamJungGu <nowage@gmail.com>"]
 description = "Toggle asterisk bullet todo states in Markdown files via slash commands (use Opt+Shift+Enter shortcut)"
-repository = "https://github.com/Finfra/vsCodeExt/tree/main/todo-asterisk-bullet/zed"
+repository = "https://github.com/Finfra/vsCodeExt"
 
 [slash_commands.todo]
 description = "Toggle asterisk bullet todo state for selected text (bind to Opt+Shift+Enter)"

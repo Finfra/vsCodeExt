@@ -85,17 +85,58 @@ Text → * [ ] → * [~] → * [v] → * [!] → * [x] → Text
    
 
 ---
+### 3. shell
+* OS전체에서 작동하도록 keyboardMaestro에서 사용할 목적임. 
+* 저장 대상 폴더는 ~/.bin/ 
+#### 설정 방법
 
-### 3. Zed
+```sh
+# 설치 스크립트 예시
+mkdir -p ~/.bin/
+cp todo-asterisk-bullet/shell/*  ~/.bin/
+chmod +x ~/.bin/todo-asterisk-bullet_forward.sh ~/.bin/todo-asterisk-bullet_backward.sh
+```
+### 4. Zed
+#### 아래 문제점 해결 전까지 사용 못함.
+* build는 되나 테스트 설치 실패
+* 에디터 직접 조작은 아직 지원 안함 (Zed API 제한)
+* AI Assistant 패널에서만 사용 가능
+* 단축키 설정은 현재 구현에서 불가
 
-#### 테스트 설치
-1. `todo-asterisk-bullet/zed` 폴더 전체를 Zed 확장 폴더(예: `~/.config/zed/extensions/todo-asterisk-bullet`)에 복사
-2. keymap.json에 **Opt+Shift+Enter (Mac) / Alt+Shift+Enter (Windows/Linux)** 단축키를 수동 등록
-3. Zed 재시작 후 slash command(`/todo`) 또는 단축키로 사용
+#### 테스트 설치 (Dev Extension)
+1. `todo-asterisk-bullet/zed` 폴더에서 터미널 실행:
+   ```bash
+   cargo build --release
+   ```
+2. Zed 에디터에서 `Cmd+Shift+P` → "Extensions: Install Dev Extension" 선택
+3. `todo-asterisk-bullet/zed` 폴더 선택해서 설치
+4. keymap.json에 **Opt+Shift+Enter (Mac) / Alt+Shift+Enter (Windows/Linux)** 단축키를 수동 등록
+5. slash command(`/todo`) 또는 단축키로 즉시 사용 가능
 
-#### 배포 방법
-- Zed 공식 마켓플레이스 등록(추후 지원 예정)
-- 또는 GitHub Release에 소스/빌드 파일 업로드
+#### 배포 방법 (공식 마켓플레이스)
+1. **사전 요구사항**: Rust는 반드시 `rustup`으로 설치 (brew 설치 시 동작 안함)
+2. **zed-industries/extensions 저장소에 PR 제출**:
+   ```bash
+   # 1. extensions 저장소 fork 후 clone
+   git clone https://github.com/your-username/extensions.git
+   cd extensions
+   
+   # 2. 확장을 submodule로 추가
+   git submodule add https://github.com/Finfra/vsCodeExt.git extensions/todo-asterisk-bullet
+   
+   # 3. extensions.toml에 엔트리 추가:
+   [todo-asterisk-bullet]
+   submodule = "extensions/todo-asterisk-bullet"
+   path = "todo-asterisk-bullet/zed"
+   version = "0.1.0"
+   
+   # 4. 정렬 및 커밋
+   pnpm sort-extensions
+   git add .
+   git commit -m "Add todo-asterisk-bullet extension"
+   ```
+3. **PR 제출**: 머지되면 자동으로 Zed 확장 레지스트리에 배포
+4. **업데이트**: submodule 업데이트 + extensions.toml 버전 수정 후 재 PR
 
 ---
 
