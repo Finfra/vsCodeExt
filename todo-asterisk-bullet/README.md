@@ -1,0 +1,107 @@
+# Todo Asterisk Bullet
+
+마크다운에서 asterisk(*) 기반의 todo bullet 상태를 손쉽게 토글할 수 있는 에디터 확장(Obsidian, VSCode, Zed 등) 통합 프로젝트입니다.
+
+## 상태 순환 예시
+
+```
+Text → * [ ] → * [~] → * [v] → * [!] → * [x] → Text
+```
+
+## 프로젝트 개요
+
+- 하나의 상태 순환 로직을 Obsidian, VSCode, Zed 등 다양한 에디터에서 동일하게 사용할 수 있도록 구현
+- 각 플랫폼별로 최적화된 확장/플러그인 제공
+- 상태 순환, 개발 규칙 등은 prd.md, rule.md 참고
+
+## 폴더 구조
+
+- obsidian/ : Obsidian 플러그인
+- vscode/   : VSCode 확장
+- zed/      : Zed 확장
+- prd.md, rule.md : 공통 요구사항 및 개발 규칙
+
+## 플랫폼별 주요 차이
+
+- **상태 순환 구조**:  
+  `Text → * [ ] → * [~] → * [v] → * [!] → * [x] → Text`
+- **VSCode**: Opt/Alt+Shift+Enter 단축키, 멀티라인 지원, 명령 팔레트 지원
+- **Obsidian**: Opt/Alt+Shift+Enter 단축키(권장, 실제 단축키는 keymap에서 변경 가능), 한 줄 단위 동작(멀티라인은 반복 호출 필요), 명령 팔레트 지원
+- **Zed**: slash command(`/todo`), Opt/Alt+Shift+Enter(수동 keymap 설정 필요), 여러 줄 지원
+
+---
+
+## 설치 및 배포 방법
+
+### 1. Obsidian
+
+#### 테스트 설치
+1. `todo-asterisk-bullet/obsidian` 폴더에서 터미널 실행  
+   ```
+   npm install
+   npm run build
+   ```
+2. 빌드된 `main.js`, `manifest.json`, `styles.css` 파일을 Obsidian vault의 원하는 플러그인 폴더(예: `~/_doc/.obsidian/plugins/todo-asterisk-bullet`)에 복사
+   cp todo-asterisk-bullet/obsidian/main.js todo-asterisk-bullet/obsidian/manifest.json todo-asterisk-bullet/obsidian/styles.css /Users/nowage/_doc/.obsidian/plugins/todo-asterisk-bullet/
+
+3. Obsidian에서 플러그인 활성화
+4. 명령어 팔레트에서 "Toggle Asterisk Bullet State" 실행 또는 단축키(**Opt+Shift+Enter (Mac) / Alt+Shift+Enter (Windows/Linux)**) 사용
+
+#### 배포 방법
+- 운영 환경에 배포: 빌드된 `main.js`, `manifest.json`, `styles.css` 파일을 `/Users/nowage/_doc/.obsidian/plugins/todo-asterisk-bullet` 폴더에 복사
+- 플러그인 폴더를 zip으로 압축 후 GitHub Release에 업로드
+- 또는 Obsidian 커뮤니티 플러그인 등록 가이드에 따라 제출
+
+---
+
+### 2. VSCode
+
+#### 테스트 설치
+1. `todo-asterisk-bullet/vscode` 폴더에서 터미널 실행
+2. 의존성 설치:  
+   ```
+   npm install
+   ```
+3. 확장 개발 모드 실행:  
+   ```
+   code .
+   ```
+   F5(디버그)로 확장 테스트
+4. 또는 `~/.vscode/extensions/todo-asterisk-bullet`에 폴더 복사 후 VSCode 재시작
+
+#### 배포 방법
+1. vsce 설치(최초 1회):  
+   ```
+   npm install -g vsce
+   ```
+2. 패키징:  
+   ```
+   vsce package
+   ```
+   (`.vsix` 파일 생성)
+
+3. 마켓플레이스 배포:  
+   * [확장 관리](https://marketplace.visualstudio.com/manage)에서 "+New extension"에 업로드
+   
+
+---
+
+### 3. Zed
+
+#### 테스트 설치
+1. `todo-asterisk-bullet/zed` 폴더 전체를 Zed 확장 폴더(예: `~/.config/zed/extensions/todo-asterisk-bullet`)에 복사
+2. keymap.json에 **Opt+Shift+Enter (Mac) / Alt+Shift+Enter (Windows/Linux)** 단축키를 수동 등록
+3. Zed 재시작 후 slash command(`/todo`) 또는 단축키로 사용
+
+#### 배포 방법
+- Zed 공식 마켓플레이스 등록(추후 지원 예정)
+- 또는 GitHub Release에 소스/빌드 파일 업로드
+
+---
+
+## 참고
+
+- 각 플랫폼별 상세 사용법 및 단축키는 각 폴더의 README.md 참고
+- 상태 순환, 개발 규칙 등은 prd.md, rule.md 참고
+- 오픈 소스: https://github.com/Finfra/vsCodeExt/tree/main/todo-asterisk-bullet
+- 문의: NamJungGu(nowage@gmail.com) / Finfra Co., Ltd.

@@ -1,86 +1,26 @@
-# Todo Asterisk Bullet
+# Todo Asterisk Bullet - Obsidian Plugin
 
-A simple Obsidian plugin to toggle asterisk bullet todo states, similar to VSCode's Markdown Todo extension.
-## Todo
-* https://claude.ai/share/b174c0fe-e7ca-4070-ab6a-e55d3a3a1b73
-## Features
-- **Cycle through states**: Text → `*` → `* [ ]` → `* [x]` → `*` → Text
-- **Keyboard shortcut**: `Cmd/Ctrl + Shift + T`
-- **Text preservation**: Maintains existing text when toggling states
-- **Multiple formats**: Supports `[x]`, `[X]`, `[v]`, `[✓]` check marks
-- **List compatibility**: Works with both `-` and `*` bullet points (outputs as `*`)
-- **Indentation preserved**: Maintains original indentation levels
+Obsidian용 Todo Asterisk Bullet plugin입니다. Markdown에서 asterisk bullet todo 상태를 순환하는 기능을 제공합니다.
 
-## Installation
+## 🔄 상태 순환
 
-### From Obsidian Community Plugins
-1. Open Obsidian Settings
-2. Go to Community Plugins and disable Safe Mode
-3. Click Browse and search for "Todo Asterisk Bullet"
-4. Install and enable the plugin
-
-### Manual Installation
-1. Download the latest release
-2. Extract files to `[VAULT]/.obsidian/plugins/todo-asterisk-bullet/`
-3. Enable the plugin in Community Plugins settings
-
-## Usage
-
-### Keyboard Shortcut
-- Press `Cmd/Ctrl + Shift + T` on any line
-
-### Command Palette
-- Search for "Toggle Asterisk Bullet State"
-
-### Example
 ```
-Initial text
-* Initial text (first toggle)
-* [ ] Initial text (second toggle)
-* [x] Initial text (third toggle)
-* Initial text (fourth toggle - cycles back)
+Text → * [ ] → * [~] → * [v] → * [!] → * [x] → Text
 ```
 
-## Development
+## 주요 기능
 
-### Setup
-```bash
-git clone https://github.com/[YOUR_USERNAME]/obsidian-todo-asterisk-bullet.git
-cd obsidian-todo-asterisk-bullet
-npm install
-```
+- 명령어 또는 단축키로 상태 순환
+- 한 줄 단위로 상태 순환(멀티라인은 반복 호출 필요)
+- 들여쓰기 및 텍스트 보존
 
-### Build
-```bash
-npm run dev    # Development mode with file watching
-npm run build  # Production build
-```
+## 단축키
 
-### Testing
-1. Build the plugin
-2. Copy `main.js`, `manifest.json`, and `styles.css` to your test vault's plugin folder
-3. Enable the plugin in Obsidian
+- **Cmd+Shift+T** (Mac)
+- **Ctrl+Shift+T** (Windows)
+- 명령 팔레트에서 "Toggle Asterisk Bullet State"로도 사용 가능
 
-## Changelog
+## 기타
 
-### 1.0.0
-- Initial release
-- Support for multiple check mark formats
-- Fixed repetitive toggle issues
-- Added hyphen list support
-- Improved text preservation
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-## License
-
-MIT License - see [LICENSE](LICENSE) file for details.
-
-## Support
-
-If you encounter any issues or have suggestions, please [open an issue](https://github.com/[YOUR_USERNAME]/obsidian-todo-asterisk-bullet/issues) on GitHub.
+- VSCode, Zed Extension과 동일한 상태 순환 로직을 사용합니다.
+- 하이픈 리스트(`- [ ]`)도 지원합니다.
