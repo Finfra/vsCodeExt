@@ -30,3 +30,4 @@ else
     process_input "$input"
   fi
 fi
+echo ""

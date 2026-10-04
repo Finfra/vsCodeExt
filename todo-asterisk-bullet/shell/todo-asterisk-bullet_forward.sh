@@ -1,6 +1,7 @@
 #!/bin/bash
 # todo-asterisk-bullet_forward.sh
 # 입력된 각 줄의 상태를 다음 상태로 순환
+export PATH=$PATH:/opt/homebrew/opt/coreutils/libexec/gnubin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/nowage/.local/bin:/usr/bin:/bin
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/todo-asterisk-bullet_common.sh"
@@ -30,3 +31,5 @@ else
     process_input "$input"
   fi
 fi
+
+echo ""
