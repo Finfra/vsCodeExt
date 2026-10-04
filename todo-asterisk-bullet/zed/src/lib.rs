@@ -60,12 +60,16 @@ fn toggle_line_state(line: &str) -> String {
     // 들여쓰기 추출
     let indent = extract_indent(line);
     
-    // 상태 순환: Text → * [ ] → * [~] → * [v] → * [!] → * [x] → Text
-    let states = vec!["[ ]", "[~]", "[v]", "[!]", "[x]"];
+    // 상태 순환: Text → * [ ] → * [~] → * [v] → * [>] → * [x] → Text
+    let states = vec!["[ ]", "[~]", "[v]", "[>]", "[x]"];
+    // [!] = 구 보류 표기(2026-10-04 이전) — [>] 와 같은 단계로 인식
+    const LEGACY_HOLD: &str = "[!]";
     
     // 현재 상태 확인
     for (i, state) in states.iter().enumerate() {
-        if is_match(state, line) {
+        let legacy = *state == "[>]" && is_match(LEGACY_HOLD, line);
+        if is_match(state, line) || legacy {
+            let state = if legacy { &LEGACY_HOLD } else { state };
             let text_after = extract_text_after_bullet(line, state);
             if i < states.len() - 1 {
                 // 다음 상태로
@@ -149,7 +153,9 @@ mod tests {
         assert_eq!(toggle_line_state("Hello world"), "* [ ] Hello world");
         assert_eq!(toggle_line_state("* [ ] Hello world"), "* [~] Hello world");
         assert_eq!(toggle_line_state("* [~] Hello world"), "* [v] Hello world");
-        assert_eq!(toggle_line_state("* [v] Hello world"), "* [!] Hello world");
+        assert_eq!(toggle_line_state("* [v] Hello world"), "* [>] Hello world");
+        assert_eq!(toggle_line_state("* [>] Hello world"), "* [x] Hello world");
+        // 구 보류 표기 [!] 도 보류 단계로 인식
         assert_eq!(toggle_line_state("* [!] Hello world"), "* [x] Hello world");
         assert_eq!(toggle_line_state("* [x] Hello world"), "Hello world");
     }

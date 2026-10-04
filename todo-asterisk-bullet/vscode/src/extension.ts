@@ -1,11 +1,11 @@
 import * as vscode from 'vscode';
 
-const STATES = ["[ ]", "[~]", "[v]", "[!]", "[x]"];
+const STATES = ["[ ]", "[~]", "[v]", "[>]", "[x]"];
 const STATE_REGEXES = [
     /^\s*[-*]\s*\[\s*\]\s*/,
     /^\s*[-*]\s*\[~\]\s*/,
     /^\s*[-*]\s*\[v\]\s*/i,
-    /^\s*[-*]\s*\[!\]\s*/,
+    /^\s*[-*]\s*\[[>!]\]\s*/, // [!] = 구 보류 표기(2026-10-04 이전) 호환
     /^\s*[-*]\s*\[x\]\s*/i
 ];
 const BULLET_REPLACE = /^\s*[-*]\s*/;

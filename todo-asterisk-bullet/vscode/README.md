@@ -5,7 +5,7 @@ VSCode용 Todo Asterisk Bullet extension입니다. Markdown에서 asterisk bulle
 ## 🔄 상태 순환
 
 ```
-Text → * [ ] → * [~] → * [v] → * [!] → * [x] → Text
+Text → * [ ] → * [~] → * [v] → * [>] → * [x] → Text
 ```
 
 ## 주요 기능

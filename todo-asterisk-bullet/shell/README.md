@@ -4,7 +4,7 @@
 `todo-asterisk-bullet`의 상태 순환 로직을 쉘 환경에서 테스트하거나, 외부에서 간단히 사용할 수 있도록 제공하는 shell 스크립트 모음입니다.
 
 - **상태 순환 규칙**:  
-  일반 텍스트 → `* ` → `* [ ]` → `* [~]` → `* [v]` → `* [!]` → `* [x]` → 일반 텍스트  
+  일반 텍스트 → `* ` → `* [ ]` → `* [~]` → `* [v]` → `* [>]` → `* [x]` → 일반 텍스트  
   (정의되지 않은 상태 토큰도 모두 제거 후 새 토큰만 남김)
 - **들여쓰기 및 본문 텍스트**는 항상 보존됩니다.
 
@@ -42,7 +42,7 @@ echo -e 'aa\nxxx' | ./todo-asterisk-bullet_forward.sh
 
 echo -e 'bb\nxxx' | ./todo-asterisk-bullet_backward.sh
 # 결과:
-# * [!] bb
+# * [>] bb
 # xxx
 ```
 
@@ -54,7 +54,7 @@ echo '* [x] aa' | ./todo-asterisk-bullet_forward.sh
 # 결과: aa
 
 echo 'bb' | ./todo-asterisk-bullet_backward.sh
-# 결과: * [!] bb
+# 결과: * [>] bb
 
 echo -e 'aa\nxxx' | ./todo-asterisk-bullet_forward.sh
 # 결과:
@@ -63,7 +63,7 @@ echo -e 'aa\nxxx' | ./todo-asterisk-bullet_forward.sh
 
 echo -e 'bb\nxxx' | ./todo-asterisk-bullet_backward.sh
 # 결과:
-# * [!] bb
+# * [>] bb
 # xxx
 ```
 
@@ -89,17 +89,17 @@ xxx'
   ~/_git/__all/vsCodeExt main$ ./todo-asterisk-bullet/shell/todo-asterisk-bullet_forward.sh  '* [x] aa'
 aa
   ~/_git/__all/vsCodeExt main$ ./todo-asterisk-bullet/shell/todo-asterisk-bullet_backward.sh  'bb'
-* [!] bb
+* [>] bb
   ~/_git/__all/vsCodeExt main$ ./todo-asterisk-bullet/shell/todo-asterisk-bullet_forward.sh  'aa
 xxx'
 * [ ] aa
 xxx
   ~/_git/__all/vsCodeExt main$ ./todo-asterisk-bullet/shell/todo-asterisk-bullet_backward.sh  'bb
 xxx'
-* [!] bb
+* [>] bb
 xxx
   ~/_git/__all/vsCodeExt main$ ./todo-asterisk-bullet/shell/todo-asterisk-bullet_forward.sh  '* [v] aa'
-* [!] aa
+* [>] aa
   ~/_git/__all/vsCodeExt main$ ./todo-asterisk-bullet/shell/todo-asterisk-bullet_backward.sh  '* [v] bb'
 * [~] bb
   ~/_git/__all/vsCodeExt main$ ./todo-asterisk-bullet/shell/todo-asterisk-bullet_forward.sh  '* aa'

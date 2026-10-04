@@ -2,12 +2,12 @@ import { Plugin, Editor, MarkdownView, SettingTab, App, PluginSettingTab } from 
 
 export default class TodoAsteriskBulletPlugin extends Plugin {
     // 상태 순환 정의
-    private readonly STATES = ["[ ]", "[~]", "[v]", "[!]", "[x]"];
+    private readonly STATES = ["[ ]", "[~]", "[v]", "[>]", "[x]"];
     private readonly STATE_REGEXES = [
         /^\s*[-*]\s*\[\s*\]\s*/,
         /^\s*[-*]\s*\[~\]\s*/,
         /^\s*[-*]\s*\[v\]\s*/i,
-        /^\s*[-*]\s*\[!\]\s*/,
+        /^\s*[-*]\s*\[[>!]\]\s*/, // [!] = 구 보류 표기(2026-10-04 이전) 호환
         /^\s*[-*]\s*\[x\]\s*/i
     ];
     private readonly BULLET_REPLACE = /^\s*[-*]\s*/;
@@ -48,7 +48,7 @@ export default class TodoAsteriskBulletPlugin extends Plugin {
         let newLine = '';
         let matched = false;
 
-        // 상태 순환: Text → * [ ] → * [~] → * [v] → * [!] → * [x] → Text
+        // 상태 순환: Text → * [ ] → * [~] → * [v] → * [>] → * [x] → Text
         for (let i = 0; i < this.STATE_REGEXES.length; i++) {
             const regex = this.STATE_REGEXES[i];
             if (regex.test(line)) {
@@ -108,7 +108,7 @@ class TodoAsteriskBulletSettingTab extends PluginSettingTab {
         containerEl.createEl('p', { text: '마크다운에서 asterisk(*) 기반의 todo bullet 상태를 손쉽게 토글할 수 있는 플러그인입니다.' });
 
         containerEl.createEl('h3', { text: '상태 순환 구조' });
-        containerEl.createEl('pre', { text: 'Text → * [ ] → * [~] → * [v] → * [!] → * [x] → Text' });
+        containerEl.createEl('pre', { text: 'Text → * [ ] → * [~] → * [v] → * [>] → * [x] → Text' });
 
         containerEl.createEl('h3', { text: '주요 단축키' });
         containerEl.createEl('ul', {});

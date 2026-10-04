@@ -3,7 +3,7 @@
 ../todo-asterisk-bullet/prd.md
 ## 1. 상태 순환 로직
 - 순환 순서:  
-  일반 텍스트 → `* [ ]` → `* [~]` → `* [v]` → `* [!]` → `* [x]` → 일반 텍스트
+  일반 텍스트 → `* [ ]` → `* [~]` → `* [v]` → `* [>]` → `* [x]` → 일반 텍스트
 - 각 상태는 줄의 맨 앞(들여쓰기 이후)에 위치하며, 기존 텍스트는 변경하지 않는다.
 
 ## 2. 들여쓰기 및 텍스트 보존
@@ -46,8 +46,8 @@ jdk
 |---------------------|-------------------------|
 | *[ ] dkfjdkfjdk     | * [~] dkfjdkfjdk        |
 | *[~] dkfjdkfjdk     | * [v] dkfjdkfjdk        |
-| *[v] dkfjdkfjdk     | * [!] dkfjdkfjdk        |
-| *[!] dkfjdkfjdk     | * [x] dkfjdkfjdk        |
+| *[v] dkfjdkfjdk     | * [>] dkfjdkfjdk        |
+| *[>] dkfjdkfjdk     | * [x] dkfjdkfjdk        |
 | *[x] dkfjdkfjdk     | dkfjdkfjdk              |
 | dkfjdkfjdk          | * [ ] dkfjdkfjdk        |
 | *[*] dkfjdkfjdk     | * [ ] dkfjdkfjdk        |
