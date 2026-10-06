@@ -1,8 +1,8 @@
 {
   "name": "todo-asterisk-bullet",
   "displayName": "Todo Asterisk Bullet",
-  "description": "마크다운에서 * [ ] → * [~] → * [v] → * [>] → * [x] → Text 순환 토글을 지원하는 VSCode 확장",
-  "version": "0.0.4",
+  "description": "마크다운에서 * [ ] → * [~] → * [v] → * [!] → * [>] → * [x] → * [?] → Text 순환 토글을 지원하는 VSCode 확장 (착수전·진행·완료·보류·위임·취소·모름)",
+  "version": "0.0.5",
   "publisher": "nowage",
   "readme": "README.md",
   "engines": {
@@ -34,7 +34,8 @@
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./"
+    "watch": "tsc -watch -p ./",
+    "test": "npm run compile && node test/toggle.test.js"
   },
   "devDependencies": {
     "@types/vscode": "^1.60.0",
