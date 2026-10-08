@@ -1,47 +1,60 @@
 # Todo Asterisk Bullet - VSCode Extension
 
-Cycle Markdown asterisk-bullet todo states with one command.
+Cycle Markdown asterisk-bullet todo states with one shortcut.
+단축키 하나로 마크다운 asterisk bullet todo 상태를 순환함.
 
-VSCode용 Todo Asterisk Bullet extension입니다. Markdown에서 asterisk bullet todo 상태를 순환하는 기능을 제공합니다.
-
-## 🔄 상태 순환 (State cycle)
+## 🔄 State cycle · 상태 순환
 
 ```
 * [] → * [~] → * [v] → * [>] → * [!] → * [x] → * [?] → * [] …
 ```
 
-| 표기  | 상태   | State       |
-| :---- | :----- | :---------- |
-| `[]`  | 착수전 | To do       |
-| `[~]` | 진행   | In progress |
-| `[v]` | 완료   | Done        |
-| `[>]` | 위임   | Delegated   |
-| `[!]` | 보류   | On hold     |
-| `[x]` | 취소   | Cancelled   |
-| `[?]` | 모름   | Unknown     |
+| Mark  | State       | 상태   |
+| :---- | :---------- | :----- |
+| `[]`  | To do       | 착수전 |
+| `[~]` | In progress | 진행   |
+| `[v]` | Done        | 완료   |
+| `[>]` | Delegated   | 위임   |
+| `[!]` | On hold     | 보류   |
+| `[x]` | Cancelled   | 취소   |
+| `[?]` | Unknown     | 모름   |
 
-* 일반 텍스트·체크박스 없는 bullet(`* `·`- `) 에서 누르면 `* [] ` 로 시작 (`*강조*` 문장은 bullet 로 보지 않음)
-* `[?]` 다음은 `[]` 로 돌아감 — 7단계 순환, 텍스트로 복귀하지 않음
-* 접두(공백 포함)만 한 번에 교체하고 커서는 접두 뒤로 이동
-* 구 표기 `[ ]` 도 착수전으로 인식
+* Plain text or a bullet without a checkbox (`* `, `- `) starts at `* [] ` (an `*emphasis*` sentence is not treated as a bullet).
+  일반 텍스트·체크박스 없는 bullet(`* `·`- `)에서 누르면 `* [] ` 로 시작함(`*강조*` 문장은 bullet 로 보지 않음).
+* After `[?]` it returns to `[]` — a 7-state loop that never goes back to plain text.
+  `[?]` 다음은 `[]` 로 돌아감 — 7단계 순환이며 텍스트로 복귀하지 않음.
+* Only the prefix (including the trailing space) is replaced in one edit, and the cursor moves right after it.
+  접두(뒤 공백 포함)만 한 번에 교체하고 커서는 접두 바로 뒤로 이동함.
+* The legacy `[ ]` mark is recognized as To do.
+  구 표기 `[ ]` 도 착수전으로 인식함.
 
-## 주요 기능
+## ✨ Features · 주요 기능
 
-- 명령 팔레트 또는 단축키로 상태 순환
-- 여러 줄 선택 시 각 줄별로 상태 순환 적용
-- 들여쓰기 및 텍스트 보존
+* Cycle the state from the Command Palette or a shortcut.
+  명령 팔레트나 단축키로 상태를 순환함.
+* With a multi-line selection, each line is cycled separately.
+  여러 줄을 선택하면 줄마다 따로 순환함.
+* Indentation and line text are preserved.
+  들여쓰기와 본문 텍스트는 그대로 유지함.
+* Hyphen lists (`- [ ]`) are supported and normalized to `* `.
+  하이픈 리스트(`- [ ]`)도 지원하며 `* ` 로 정규화함.
 
-## 단축키
+## ⌨️ Shortcut · 단축키
 
-- **Opt+Shift+Enter** (Mac)
-- **Alt+Shift+Enter** (Windows/Linux)
-- 명령 팔레트에서 "Toggle Asterisk Bullet State"로도 사용 가능
+| Platform · 플랫폼 | Key · 키               |
+| :---------------- | :--------------------- |
+| macOS             | **Option+Shift+Enter** |
+| Windows / Linux   | **Alt+Shift+Enter**    |
 
-## 기타
+* Also available as **"Toggle Asterisk Bullet State"** in the Command Palette.
+  명령 팔레트의 **"Toggle Asterisk Bullet State"** 로도 실행할 수 있음.
 
-- Obsidian, Zed Extension과 동일한 상태 순환 로직을 사용합니다.
-- 하이픈 리스트(`- [ ]`)도 지원합니다.
+## 📜 Changelog · 변경 이력
 
-## 변경 이력
-
-- 0.0.5 — 7단 순환으로 확장: `[>]` 위임·`[!]` 보류 분리, `[?]` 모름 추가 · 착수전 표기 `[ ]` → `[]` · `[?]` 다음 `[]` 로 7단계 순환(텍스트 복귀 없음) · 접두만 한 번에 교체 · 시작 시 사전 로드
+* **0.0.5**
+  * Extended to a 7-state cycle: added `[>]` Delegated, `[!]` On hold and `[?]` Unknown.
+    7단계 순환으로 확장 — `[>]` 위임·`[!]` 보류·`[?]` 모름 추가.
+  * To do mark changed from `[ ]` to `[]`; `[?]` loops back to `[]` (no return to plain text).
+    착수전 표기를 `[ ]` → `[]` 로 변경, `[?]` 다음은 `[]` (텍스트 복귀 없음).
+  * Prefix is replaced in a single edit, and the extension preloads on startup for a snappier first toggle.
+    접두를 한 번에 교체하고, 시작 시 사전 로드해 첫 토글 지연을 없앰.
