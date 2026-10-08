@@ -1,5 +1,6 @@
-// 상태 순환: Text → [ ] 착수전 → [~] 진행 → [v] 완료 → [!] 보류 → [>] 위임 → [x] 취소 → [?] 모름 → Text
-export const STATES = ["[ ]", "[~]", "[v]", "[!]", "[>]", "[x]", "[?]"];
+// 상태 순환: [] 착수전 (구 표기 [ ] 도 인식) → [~] 진행 → [v] 완료 → [!] 보류 → [>] 위임 → [x] 취소 → [?] 모름 → [] …
+// 일반 텍스트·체크박스 없는 bullet 은 [] 로 진입하고, 순환 중에는 텍스트로 돌아가지 않음
+export const STATES = ["[]", "[~]", "[v]", "[!]", "[>]", "[x]", "[?]"];
 const STATE_REGEXES = [
     /^\s*[-*]\s*\[\s*\]\s*/,
     /^\s*[-*]\s*\[~\]\s*/,
@@ -21,12 +22,9 @@ export function nextLine(line: string): string {
         const regex = STATE_REGEXES[i];
         if (regex.test(line)) {
             const textAfter = line.replace(regex, '');
-            if (i < STATES.length - 1) {
-                return indent + '* ' + STATES[i + 1] + ' ' + textAfter;
-            }
-            return indent + textAfter;
+            return indent + '* ' + STATES[(i + 1) % STATES.length] + ' ' + textAfter;
         }
     }
     const textContent = line.replace(BULLET_REPLACE, '').replace(/^\s*/, '');
-    return indent + '* [ ] ' + textContent;
+    return indent + '* [] ' + textContent;
 }
