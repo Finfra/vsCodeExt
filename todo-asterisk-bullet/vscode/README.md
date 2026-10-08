@@ -1,22 +1,24 @@
 # Todo Asterisk Bullet - VSCode Extension
 
+Cycle Markdown asterisk-bullet todo states with one command.
+
 VSCode용 Todo Asterisk Bullet extension입니다. Markdown에서 asterisk bullet todo 상태를 순환하는 기능을 제공합니다.
 
-## 🔄 상태 순환
+## 🔄 상태 순환 (State cycle)
 
 ```
 * [] → * [~] → * [v] → * [>] → * [!] → * [x] → * [?] → * [] …
 ```
 
-| 표기  | 상태   |
-| :---- | :----- |
-| `[]`  | 착수전 |
-| `[~]` | 진행   |
-| `[v]` | 완료   |
-| `[>]` | 위임   |
-| `[!]` | 보류   |
-| `[x]` | 취소   |
-| `[?]` | 모름   |
+| 표기  | 상태   | State       |
+| :---- | :----- | :---------- |
+| `[]`  | 착수전 | To do       |
+| `[~]` | 진행   | In progress |
+| `[v]` | 완료   | Done        |
+| `[>]` | 위임   | Delegated   |
+| `[!]` | 보류   | On hold     |
+| `[x]` | 취소   | Cancelled   |
+| `[?]` | 모름   | Unknown     |
 
 * 일반 텍스트·체크박스 없는 bullet(`* `·`- `) 에서 누르면 `* [] ` 로 시작 (`*강조*` 문장은 bullet 로 보지 않음)
 * `[?]` 다음은 `[]` 로 돌아감 — 7단계 순환, 텍스트로 복귀하지 않음
