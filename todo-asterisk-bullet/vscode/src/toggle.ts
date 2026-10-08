@@ -1,5 +1,5 @@
-// 상태 순환: [] 착수전 (구 표기 [ ] 도 인식) → [~] 진행 → [v] 완료 → [!] 보류 → [>] 위임 → [x] 취소 → [?] 모름 → [] …
-// 일반 텍스트·체크박스 없는 bullet 은 [] 로 진입하고, 순환 중에는 텍스트로 돌아가지 않음
+// 상태 순환: 텍스트 → * (bullet) → [] 착수전 (구 표기 [ ] 도 인식) → [~] 진행 → [v] 완료 → [!] 보류 → [>] 위임 → [x] 취소 → [?] 모름 → * …
+// [?] 다음은 첫 단계인 bullet(* ) 로 돌아가고, 텍스트로는 돌아가지 않음
 export const STATES = ["[]", "[~]", "[v]", "[!]", "[>]", "[x]", "[?]"];
 const STATE_REGEXES = [
     /^\s*[-*]\s*\[\s*\]\s*/,
@@ -10,7 +10,7 @@ const STATE_REGEXES = [
     /^\s*[-*]\s*\[x\]\s*/i,
     /^\s*[-*]\s*\[\?\]\s*/
 ];
-const BULLET_PREFIX = /^(?:[-*]\s*)?/;
+const BULLET_PREFIX = /^[-*](?:\s+|$)/; // `*bold*` 같은 강조는 bullet 아님
 const INDENT_PATTERN = /^(\s*)/;
 
 // 줄에 적용할 최소 편집 — [start, end) 접두(bullet·상태 표기)만 text 로 바꾸고 본문은 건드리지 않음
@@ -21,20 +21,25 @@ export function nextEdit(line: string, cursorCol: number): ToggleEdit {
     const start = indentMatch ? indentMatch[1].length : 0;
 
     let end = start;
-    let text = '* ' + STATES[0] + ' ';
+    let text = '';
     let matched = false;
     for (let i = 0; i < STATE_REGEXES.length; i++) {
         const m = line.match(STATE_REGEXES[i]);
         if (m) {
             end = m[0].length;
-            text = '* ' + STATES[(i + 1) % STATES.length] + ' ';
+            text = i + 1 < STATES.length ? '* ' + STATES[i + 1] + ' ' : '* ';
             matched = true;
             break;
         }
     }
     if (!matched) {
         const bullet = line.slice(start).match(BULLET_PREFIX);
-        end = start + (bullet ? bullet[0].length : 0);
+        if (bullet) {
+            end = start + bullet[0].length;          // bullet 만 있는 줄 → 착수전
+            text = '* ' + STATES[0] + ' ';
+        } else {
+            text = '* ';                             // 일반 텍스트 → bullet
+        }
     }
 
     // 커서: 접두 안(또는 경계)이면 새 접두 뒤, 본문 안이면 본문 기준 상대 위치 유지

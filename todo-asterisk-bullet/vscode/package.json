@@ -1,7 +1,7 @@
 {
   "name": "todo-asterisk-bullet",
   "displayName": "Todo Asterisk Bullet",
-  "description": "마크다운에서 * [] → * [~] → * [v] → * [!] → * [>] → * [x] → * [?] 순환 토글을 지원하는 VSCode 확장 (착수전·진행·완료·보류·위임·취소·모름)",
+  "description": "마크다운에서 * → * [] → * [~] → * [v] → * [!] → * [>] → * [x] → * [?] 순환 토글 (bullet·착수전·진행·완료·보류·위임·취소·모름)",
   "version": "0.0.5",
   "publisher": "nowage",
   "readme": "README.md",
