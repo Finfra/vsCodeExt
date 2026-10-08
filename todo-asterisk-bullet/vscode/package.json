@@ -12,7 +12,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:todoAsteriskBullet.toggleState"
+    "onCommand:todoAsteriskBullet.toggleState",
+    "onStartupFinished"
   ],
   "main": "./out/extension.js",
   "contributes": {

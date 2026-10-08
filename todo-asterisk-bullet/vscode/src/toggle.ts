@@ -10,21 +10,40 @@ const STATE_REGEXES = [
     /^\s*[-*]\s*\[x\]\s*/i,
     /^\s*[-*]\s*\[\?\]\s*/
 ];
-const BULLET_REPLACE = /^\s*[-*]\s*/;
+const BULLET_PREFIX = /^(?:[-*]\s*)?/;
 const INDENT_PATTERN = /^(\s*)/;
+
+// 줄에 적용할 최소 편집 — [start, end) 접두(bullet·상태 표기)만 text 로 바꾸고 본문은 건드리지 않음
+export interface ToggleEdit { start: number; end: number; text: string; cursor: number; }
+
+export function nextEdit(line: string, cursorCol: number): ToggleEdit {
+    const indentMatch = line.match(INDENT_PATTERN);
+    const start = indentMatch ? indentMatch[1].length : 0;
+
+    let end = start;
+    let text = '* ' + STATES[0] + ' ';
+    let matched = false;
+    for (let i = 0; i < STATE_REGEXES.length; i++) {
+        const m = line.match(STATE_REGEXES[i]);
+        if (m) {
+            end = m[0].length;
+            text = '* ' + STATES[(i + 1) % STATES.length] + ' ';
+            matched = true;
+            break;
+        }
+    }
+    if (!matched) {
+        const bullet = line.slice(start).match(BULLET_PREFIX);
+        end = start + (bullet ? bullet[0].length : 0);
+    }
+
+    // 커서: 접두 안(또는 경계)이면 새 접두 뒤, 본문 안이면 본문 기준 상대 위치 유지
+    const cursor = cursorCol <= end ? start + text.length : cursorCol + text.length - (end - start);
+    return { start, end, text, cursor };
+}
 
 // 한 줄을 다음 상태로 바꾼 결과를 돌려줌 (들여쓰기 보존, bullet 은 `*` 로 정규화)
 export function nextLine(line: string): string {
-    const indentMatch = line.match(INDENT_PATTERN);
-    const indent = indentMatch ? indentMatch[1] : '';
-
-    for (let i = 0; i < STATE_REGEXES.length; i++) {
-        const regex = STATE_REGEXES[i];
-        if (regex.test(line)) {
-            const textAfter = line.replace(regex, '');
-            return indent + '* ' + STATES[(i + 1) % STATES.length] + ' ' + textAfter;
-        }
-    }
-    const textContent = line.replace(BULLET_REPLACE, '').replace(/^\s*/, '');
-    return indent + '* [] ' + textContent;
+    const e = nextEdit(line, 0);
+    return line.slice(0, e.start) + e.text + line.slice(e.end);
 }
