@@ -1,8 +1,8 @@
 {
   "name": "todo-asterisk-bullet",
   "displayName": "Todo Asterisk Bullet",
-  "description": "Cycle Markdown todo bullets through 7 states: * [] → * [~] → * [v] → * [>] → * [!] → * [x] → * [?] (todo·in progress·done·delegated·on hold·cancelled·unknown) / 마크다운 7단계 순환 토글 (착수전·진행·완료·위임·보류·취소·모름)",
-  "version": "0.0.5",
+  "description": "Cycle Markdown todo bullets through 7 states: * [ ] → * [~] → * [v] → * [>] → * [!] → * [x] → * [?] (todo·in progress·done·delegated·on hold·cancelled·unknown) / 마크다운 7단계 순환 토글 (착수전·진행·완료·위임·보류·취소·모름)",
+  "version": "0.0.6",
   "publisher": "nowage",
   "readme": "README.md",
   "engines": {
